@@ -1,0 +1,31 @@
+<resources>
+    <string name="app_name">Baking App</string>
+
+    <string name="servings">servings: %1$d</string>
+
+    <!--descriptions-->
+    <string name="explore_action_description">Explore action</string>
+    <string name="recipe_image_description">recipe image</string>
+    <string name="favorite_action_description">Favorite action</string>
+    <string name="step_short_description">Step short description</string>
+    <string name="step_detail_description">Step detail description</string>
+    <string name="video_description">video description</string>
+
+    <!--Button texts-->
+    <string name="explore_button_text">Explore</string>
+    <string name="preview_text">Preview</string>
+    <string name="next_text">Next</string>
+
+    <string name="primary_text">Primary text goes here</string>
+    <string name="subtext_text">Subtext goes here</string>
+    <string name="ingredients_tile_text">Ingredients</string>
+    <string name="ingredient_list_text">ingredient list</string>
+    <string name="step_counter_text">Step #</string>
+    <string name="step_number_text">Step %1$d</string>
+    <string name="steps_text">Steps for preparing</string>
+
+    <!--tools text-->
+    <string name="step_info_tools_text">step info</string>
+
+
+</resources>

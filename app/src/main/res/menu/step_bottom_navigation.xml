@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mi_prev"
+        android:enabled="true"
+        android:icon="@drawable/ic_left_arrow"
+        android:title="@string/preview_text"
+        app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/mi_next"
+        android:enabled="true"
+        android:icon="@drawable/ic_right_arrow"
+        android:title="@string/next_text"
+        app:showAsAction="ifRoom"/>
+</menu>

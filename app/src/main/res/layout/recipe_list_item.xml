@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                    xmlns:app="http://schemas.android.com/apk/res-auto"
+                                    xmlns:tools="http://schemas.android.com/tools"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="@dimen/card_view_margin"
+                                    app:cardCornerRadius="2dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <!--Layout for text and media-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="0dp"
+            android:paddingEnd="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp">
+
+            <TextView
+                android:id="@+id/tv_recipe_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@+id/iv_recipe_image"
+                android:layout_toStartOf="@+id/iv_recipe_image"
+                android:paddingEnd="16dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="16dp"
+                android:paddingStart="0dp"
+                android:paddingTop="8dp"
+                android:textColor="?android:attr/textColorPrimary"
+                android:textSize="24sp"
+                tools:text="@string/primary_text"/>
+
+            <TextView
+                android:id="@+id/tv_recipe_servings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/tv_recipe_title"
+                android:layout_toLeftOf="@+id/iv_recipe_image"
+                android:layout_toStartOf="@+id/iv_recipe_image"
+                android:paddingEnd="16dp"
+                android:paddingLeft="0dp"
+                android:paddingRight="16dp"
+                android:paddingStart="0dp"
+                tools:text="@string/subtext_text"/>
+
+            <ImageView
+                android:id="@+id/iv_recipe_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:contentDescription="@string/recipe_image_description"
+                app:srcCompat="@drawable/recipe_default_image"/>
+        </RelativeLayout>
+
+        <!--Actions layout-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_action_explore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/cardview_light_background"
+                android:contentDescription="@string/explore_action_description"
+                style="?android:attr/borderlessButtonStyle"
+                android:text="@string/explore_button_text"/>
+
+            <ImageButton
+                android:id="@+id/ib_action_favorite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/btn_action_explore"
+                android:background="@color/cardview_light_background"
+                android:contentDescription="@string/favorite_action_description"
+                android:padding="8dp"
+                app:srcCompat="@drawable/ic_action_favorite"/>
+
+            <ImageButton
+                android:id="@+id/ib_action_decrease"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@color/cardview_light_background"
+                android:padding="8dp"
+                app:srcCompat="@drawable/ic_action_decrease"/>
+
+            <ImageButton
+                android:id="@+id/ib_action_expand"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@color/cardview_light_background"
+                android:padding="8dp"
+                app:srcCompat="@drawable/ic_action_expand"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ingredients_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ingredients_tile_text"
+                android:textAllCaps="true"/>
+
+            <TextView
+                android:id="@+id/tv_recipe_ingredients"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Supporting text goes here"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
