@@ -3,6 +3,7 @@ package com.example.android.bakingapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -17,19 +18,32 @@ import static com.example.android.bakingapp.utilities.KeyUtils.RECIPE_DETAIL;
 import static com.example.android.bakingapp.utilities.KeyUtils.RECIPE_LIST;
 
 public class RecipeListActivity extends AppCompatActivity implements RecipeHandler {
-
+    private static final int SPAN_COUNT = 3;
     private static RecipeListAdapter mAdapter;
+
+    private boolean mTwoPane = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list);
 
-        RecyclerView rv = (RecyclerView) findViewById(R.id.recipe_list);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        rv.setLayoutManager(layoutManager);
+        if (findViewById(R.id.recipe_list_600dp) != null) {
+            mTwoPane = true;
+        }
 
-        if(savedInstanceState == null) {
+        RecyclerView rv = (RecyclerView) findViewById(R.id.recipe_list);
+
+        if (mTwoPane) {
+            GridLayoutManager gridLayoutManager =
+                    new GridLayoutManager(this, SPAN_COUNT);
+            rv.setLayoutManager(gridLayoutManager);
+        } else {
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            rv.setLayoutManager(layoutManager);
+        }
+
+        if (savedInstanceState == null) {
             mAdapter = new RecipeListAdapter(this, this, null);
             // get recipe list asynchronously using Retrofit API client
             RetrofitAPIClient apiClient = new RetrofitAPIClient(this);
@@ -56,7 +70,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeHandl
     @Override
     protected void onResume() {
         super.onResume();
-        if(mAdapter != null)
+        if (mAdapter != null)
             mAdapter.notifyDataSetChanged();
     }
 
