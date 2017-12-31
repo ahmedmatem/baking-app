@@ -9,13 +9,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.android.bakingapp.R;
 import com.example.android.bakingapp.interfaces.RecipeHandler;
 import com.example.android.bakingapp.models.Recipe;
-import com.example.android.bakingapp.utilities.RecipeTextUtils;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -58,16 +56,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
         holder.name.setText(recipe.getName());
         holder.servings.setText(String.format(mContext.getString(
                 R.string.servings), recipe.getServings()));
-        holder.ingredients.setText(RecipeTextUtils.friendlyLookIngredients(recipe.getIngredients()));
-        if(recipe.isIngredientVisible()){
-            holder.ingredientsContainer.setVisibility(View.VISIBLE);
-            holder.actionDecrease.setVisibility(View.VISIBLE);
-            holder.actionExpand.setVisibility(View.GONE);
-        } else {
-            holder.ingredientsContainer.setVisibility(View.GONE);
-            holder.actionDecrease.setVisibility(View.GONE);
-            holder.actionExpand.setVisibility(View.VISIBLE);
-        }
 
         String imageUrl = recipe.getImage();
         Picasso.with(mContext)
@@ -88,16 +76,11 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
 
         TextView name;
         TextView servings;
-        TextView ingredients;
         ImageView image;
 
-//      Action buttons
+        // Action buttons
         Button actionExplore;
         ImageButton actionFavorite;
-        ImageButton actionExpand;
-        ImageButton actionDecrease;
-
-        LinearLayout ingredientsContainer;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -107,30 +90,13 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
             image = (ImageView) itemView.findViewById(R.id.iv_recipe_image);
 
             actionExplore = (Button) itemView.findViewById(R.id.btn_action_explore);
-            actionFavorite = (ImageButton) itemView.findViewById(R.id.ib_action_favorite);
-            actionExpand = (ImageButton) itemView.findViewById(R.id.ib_action_expand);
-            actionDecrease = (ImageButton) itemView.findViewById(R.id.ib_action_decrease);
-            actionDecrease.setVisibility(View.GONE);
-
-            ingredientsContainer = (LinearLayout) itemView.findViewById(
-                    R.id.ingredients_container);
-            ingredientsContainer.setVisibility(View.GONE);
-            ingredients = (TextView) itemView.findViewById(R.id.tv_recipe_ingredients);
-
             actionExplore.setOnClickListener(this);
-            actionExpand.setOnClickListener(this);
-            actionDecrease.setOnClickListener(this);
+            actionFavorite = (ImageButton) itemView.findViewById(R.id.ib_action_favorite);
         }
 
         @Override
         public void onClick(View v) {
             switch (v.getId()){
-                case R.id.ib_action_expand:
-                    showIngredientList();
-                    break;
-                case R.id.ib_action_decrease:
-                    hideIngredientList();
-                    break;
                 case R.id.btn_action_explore:
                     if(mCallback != null){
                         mCallback.onExploreClicked(position);
@@ -139,20 +105,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
                 default:
 
             }
-        }
-
-        private void hideIngredientList() {
-            mRecipes.get(position).setIngredientVisibility(false);
-            ingredientsContainer.setVisibility(View.GONE);
-            actionDecrease.setVisibility(View.GONE);
-            actionExpand.setVisibility(View.VISIBLE);
-        }
-
-        private void showIngredientList() {
-            mRecipes.get(position).setIngredientVisibility(true);
-            ingredientsContainer.setVisibility(View.VISIBLE);
-            actionExpand.setVisibility(View.GONE);
-            actionDecrease.setVisibility(View.VISIBLE);
         }
     }
 

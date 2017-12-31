@@ -10,6 +10,8 @@
     <string name="step_short_description">Step short description</string>
     <string name="step_detail_description">Step detail description</string>
     <string name="video_description">video description</string>
+    <string name="show_button_description">show button</string>
+    <string name="hide_button_description">hide button</string>
 
     <!--Button texts-->
     <string name="explore_button_text">Explore</string>

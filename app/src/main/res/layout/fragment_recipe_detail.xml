@@ -1,64 +1,90 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             xmlns:app="http://schemas.android.com/apk/res-auto"
-             xmlns:tools="http://schemas.android.com/tools"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             tools:context="com.example.android.bakingapp.fragments.RecipeDetailFragment">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              tools:context="com.example.android.bakingapp.fragments.RecipeDetailFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="2dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:background="@color/colorPrimaryLight">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:fontFamily="@font/roboto"
+                android:padding="8dp"
                 android:text="@string/ingredients_tile_text"
                 android:textColor="@android:color/white"
-                android:padding="8dp"
-                android:background="@color/colorPrimaryLight"
                 android:textSize="16sp"/>
 
-            <TextView
-                android:id="@+id/tv_ingredients"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/iv_show"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto"
-                android:paddingTop="0dp"
-                android:paddingBottom="16dp"
-                android:paddingStart="16dp"
-                android:paddingEnd="16dp"
-                tools:text="@string/ingredient_list_text"/>
-        </LinearLayout>
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@null"
+                android:src="@drawable/ic_action_expand"
+                android:tint="@color/white"
+                android:contentDescription="@string/show_button_description"
+                android:visibility="gone"/>
+
+            <ImageView
+                android:id="@+id/iv_hide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:background="@null"
+                android:src="@drawable/ic_action_decrease"
+                android:contentDescription="@string/hide_button_description"
+                android:tint="@color/white"/>
+
+        </RelativeLayout>
 
         <TextView
+            android:id="@+id/tv_ingredients"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryLight"
-            android:padding="8dp"
-            android:text="@string/steps_text"
-            android:textColor="@android:color/white"
             android:fontFamily="@font/roboto"
-            android:textSize="16sp"/>
-
-
-        <ListView
-            android:id="@+id/lv_recipe_step_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:divider="@null"
-            android:dividerHeight="0dp"
-            android:paddingBottom="8dp"
-            android:paddingTop="8dp">
-
-        </ListView>
-
+            android:paddingBottom="16dp"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="0dp"
+            tools:text="@string/ingredient_list_text"/>
     </LinearLayout>
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryLight"
+        android:fontFamily="@font/roboto"
+        android:padding="8dp"
+        android:text="@string/steps_text"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"/>
+
+
+    <ListView
+        android:id="@+id/lv_recipe_step_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp">
+
+    </ListView>
+
+</LinearLayout>

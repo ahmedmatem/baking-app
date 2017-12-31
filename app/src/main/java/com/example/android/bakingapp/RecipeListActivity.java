@@ -18,8 +18,8 @@ import static com.example.android.bakingapp.utilities.KeyUtils.RECIPE_DETAIL;
 import static com.example.android.bakingapp.utilities.KeyUtils.RECIPE_LIST;
 
 public class RecipeListActivity extends AppCompatActivity implements RecipeHandler {
-    private static final int SPAN_COUNT = 3;
     private static RecipeListAdapter mAdapter;
+    private final int SPAN_COUNT = 3;
 
     private boolean mTwoPane = false;
 

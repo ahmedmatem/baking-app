@@ -75,11 +75,11 @@
 
             <Button
                 android:id="@+id/btn_action_explore"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/cardview_light_background"
                 android:contentDescription="@string/explore_action_description"
-                style="?android:attr/borderlessButtonStyle"
                 android:text="@string/explore_button_text"/>
 
             <ImageButton
@@ -92,46 +92,7 @@
                 android:padding="8dp"
                 app:srcCompat="@drawable/ic_action_favorite"/>
 
-            <ImageButton
-                android:id="@+id/ib_action_decrease"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:background="@color/cardview_light_background"
-                android:padding="8dp"
-                app:srcCompat="@drawable/ic_action_decrease"/>
-
-            <ImageButton
-                android:id="@+id/ib_action_expand"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:background="@color/cardview_light_background"
-                android:padding="8dp"
-                app:srcCompat="@drawable/ic_action_expand"/>
         </RelativeLayout>
-
-        <LinearLayout
-            android:id="@+id/ingredients_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/ingredients_tile_text"
-                android:textAllCaps="true"/>
-
-            <TextView
-                android:id="@+id/tv_recipe_ingredients"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:text="Supporting text goes here"/>
-        </LinearLayout>
 
     </LinearLayout>
 

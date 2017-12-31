@@ -28,9 +28,7 @@
         <activity
             android:name=".RecipeDetailActivity"
             android:launchMode="singleTop"
-            android:configChanges="orientation"
-            android:parentActivityName=".RecipeListActivity"
-            android:screenOrientation="portrait">
+            android:parentActivityName=".RecipeListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".RecipeListActivity"/>

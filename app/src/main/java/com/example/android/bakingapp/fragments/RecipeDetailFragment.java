@@ -3,11 +3,13 @@ package com.example.android.bakingapp.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -24,15 +26,20 @@ import java.util.List;
  * A simple {@link Fragment} subclass.
  */
 public class RecipeDetailFragment extends Fragment
-        implements AdapterView.OnItemClickListener {
+        implements AdapterView.OnItemClickListener, View.OnClickListener {
 
     private static final String RECIPE_DETAIL = "recipe_detail";
+    public static final String INGREDIENTS_VISIBILITY_STATE = "ingredients-visibility-state";
 
     private static Recipe mRecipe;
     private List<Step> mSteps;
 
     private TextView mIngredients;
     private ListView mRecipeStepListView;
+    private ImageView mShowButton;
+    private ImageView mHideButton;
+
+    private boolean mIngredientsVisibilityState = true;
 
     private OnFragmentInteractionListener mListener;
 
@@ -69,6 +76,11 @@ public class RecipeDetailFragment extends Fragment
         mIngredients.setText(RecipeTextUtils.friendlyLookIngredients(
                 mRecipe.getIngredients()));
 
+        mShowButton = (ImageView) view.findViewById(R.id.iv_show);
+        mShowButton.setOnClickListener(this);
+        mHideButton = (ImageView) view.findViewById(R.id.iv_hide);
+        mHideButton.setOnClickListener(this);
+
         mRecipeStepListView = (ListView) view.findViewById(R.id.lv_recipe_step_list);
         RecipeStepListAdapter mAdapter = new RecipeStepListAdapter(container.getContext(),
                 getLayoutInflater(), mSteps);
@@ -76,6 +88,39 @@ public class RecipeDetailFragment extends Fragment
         mRecipeStepListView.setOnItemClickListener(this);
 
         return view;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean(INGREDIENTS_VISIBILITY_STATE, mIngredientsVisibilityState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setShowHideButton(mIngredientsVisibilityState);
+    }
+
+    private void setShowHideButton(boolean isVisible) {
+        if(isVisible){
+            mIngredients.setVisibility(View.VISIBLE);
+            mShowButton.setVisibility(View.GONE);
+            mHideButton.setVisibility(View.VISIBLE);
+        } else {
+            mIngredients.setVisibility(View.GONE);
+            mShowButton.setVisibility(View.VISIBLE);
+            mHideButton.setVisibility(View.GONE);
+        }
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if(savedInstanceState != null &&
+                savedInstanceState.containsKey(INGREDIENTS_VISIBILITY_STATE))
+        mIngredientsVisibilityState =
+                savedInstanceState.getBoolean(INGREDIENTS_VISIBILITY_STATE);
     }
 
     @Override
@@ -99,6 +144,22 @@ public class RecipeDetailFragment extends Fragment
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         if(mListener != null) {
             mListener.onFragmentInteraction(mRecipe, position);
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.iv_show:
+                mIngredientsVisibilityState = true;
+                setShowHideButton(true);
+                break;
+            case R.id.iv_hide:
+                mIngredientsVisibilityState = false;
+                setShowHideButton(false);
+                break;
+            default:
         }
     }
 
