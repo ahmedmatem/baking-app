@@ -42,6 +42,15 @@
                 android:textSize="24sp"
                 tools:text="@string/primary_text"/>
 
+            <ImageView
+                android:id="@+id/iv_recipe_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:contentDescription="@string/recipe_image_description"
+                app:srcCompat="@drawable/recipe_default_image"/>
+
             <TextView
                 android:id="@+id/tv_recipe_servings"
                 android:layout_width="wrap_content"
@@ -56,15 +65,6 @@
                 android:paddingRight="16dp"
                 android:paddingStart="0dp"
                 tools:text="@string/subtext_text"/>
-
-            <ImageView
-                android:id="@+id/iv_recipe_image"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:contentDescription="@string/recipe_image_description"
-                app:srcCompat="@drawable/recipe_default_image"/>
         </RelativeLayout>
 
         <!--Actions layout-->
@@ -90,7 +90,7 @@
                 android:background="@color/cardview_light_background"
                 android:contentDescription="@string/favorite_action_description"
                 android:padding="8dp"
-                app:srcCompat="@drawable/ic_action_favorite"/>
+                app:srcCompat="@drawable/ic_action_favorite" android:layout_toEndOf="@+id/btn_action_explore"/>
 
         </RelativeLayout>
 
