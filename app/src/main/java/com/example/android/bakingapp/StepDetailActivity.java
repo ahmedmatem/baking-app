@@ -22,7 +22,6 @@ public class StepDetailActivity extends AppCompatActivity
 
     private FragmentManager fragmentManager;
     private StepDetailFragment stepDetailFragment;
-    private boolean isLandscape = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

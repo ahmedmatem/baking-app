@@ -70,7 +70,8 @@ public class RecipeDetailFragment extends Fragment
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_recipe_detail, container, false);
+        View view = inflater.inflate(R.layout.fragment_recipe_detail,
+                container, false);
 
         mIngredients = (TextView) view.findViewById(R.id.tv_ingredients);
         mIngredients.setText(RecipeTextUtils.friendlyLookIngredients(
@@ -81,9 +82,11 @@ public class RecipeDetailFragment extends Fragment
         mHideButton = (ImageView) view.findViewById(R.id.iv_hide);
         mHideButton.setOnClickListener(this);
 
-        mRecipeStepListView = (ListView) view.findViewById(R.id.lv_recipe_step_list);
-        RecipeStepListAdapter mAdapter = new RecipeStepListAdapter(container.getContext(),
-                getLayoutInflater(), mSteps);
+        mRecipeStepListView = (ListView)
+                view.findViewById(R.id.lv_recipe_step_list);
+        RecipeStepListAdapter mAdapter =
+                new RecipeStepListAdapter(container.getContext(),
+                        getLayoutInflater(), mSteps);
         mRecipeStepListView.setAdapter(mAdapter);
         mRecipeStepListView.setOnItemClickListener(this);
 
@@ -93,7 +96,8 @@ public class RecipeDetailFragment extends Fragment
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBoolean(INGREDIENTS_VISIBILITY_STATE, mIngredientsVisibilityState);
+        outState.putBoolean(INGREDIENTS_VISIBILITY_STATE,
+                mIngredientsVisibilityState);
     }
 
     @Override
@@ -102,25 +106,13 @@ public class RecipeDetailFragment extends Fragment
         setShowHideButton(mIngredientsVisibilityState);
     }
 
-    private void setShowHideButton(boolean isVisible) {
-        if(isVisible){
-            mIngredients.setVisibility(View.VISIBLE);
-            mShowButton.setVisibility(View.GONE);
-            mHideButton.setVisibility(View.VISIBLE);
-        } else {
-            mIngredients.setVisibility(View.GONE);
-            mShowButton.setVisibility(View.VISIBLE);
-            mHideButton.setVisibility(View.GONE);
-        }
-    }
-
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        if(savedInstanceState != null &&
+        if (savedInstanceState != null &&
                 savedInstanceState.containsKey(INGREDIENTS_VISIBILITY_STATE))
-        mIngredientsVisibilityState =
-                savedInstanceState.getBoolean(INGREDIENTS_VISIBILITY_STATE);
+            mIngredientsVisibilityState =
+                    savedInstanceState.getBoolean(INGREDIENTS_VISIBILITY_STATE);
     }
 
     @Override
@@ -142,7 +134,7 @@ public class RecipeDetailFragment extends Fragment
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if(mListener != null) {
+        if (mListener != null) {
             mListener.onFragmentInteraction(mRecipe, position);
         }
     }
@@ -150,7 +142,7 @@ public class RecipeDetailFragment extends Fragment
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        switch (id){
+        switch (id) {
             case R.id.iv_show:
                 mIngredientsVisibilityState = true;
                 setShowHideButton(true);
@@ -167,4 +159,15 @@ public class RecipeDetailFragment extends Fragment
         void onFragmentInteraction(Recipe recipe, int stepPosition);
     }
 
+    private void setShowHideButton(boolean isVisible) {
+        if (isVisible) {
+            mIngredients.setVisibility(View.VISIBLE);
+            mShowButton.setVisibility(View.GONE);
+            mHideButton.setVisibility(View.VISIBLE);
+        } else {
+            mIngredients.setVisibility(View.GONE);
+            mShowButton.setVisibility(View.VISIBLE);
+            mHideButton.setVisibility(View.GONE);
+        }
+    }
 }
