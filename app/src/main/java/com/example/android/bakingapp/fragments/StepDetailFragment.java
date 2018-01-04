@@ -129,10 +129,11 @@ public class StepDetailFragment extends Fragment implements View.OnClickListener
         TextView description = (TextView) view.findViewById(R.id.tv_step_detail_description);
         // remove #._ from the beginning of description text
         // except in introduction if step position is 0
+        String frendlyDescription = mStep.mDescription.substring(3);
         if (mStepPosition != 0) {
-            mStep.mDescription = mStep.mDescription.substring(3);
+            frendlyDescription = mStep.mDescription.substring(3);
         }
-        description.setText(mStep.mDescription);
+        description.setText(frendlyDescription);
 
         /**
          * set bottom navigation

@@ -82,16 +82,6 @@
                 android:contentDescription="@string/explore_action_description"
                 android:text="@string/explore_button_text"/>
 
-            <ImageButton
-                android:id="@+id/ib_action_favorite"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/btn_action_explore"
-                android:background="@color/cardview_light_background"
-                android:contentDescription="@string/favorite_action_description"
-                android:padding="8dp"
-                app:srcCompat="@drawable/ic_action_favorite" android:layout_toEndOf="@+id/btn_action_explore"/>
-
         </RelativeLayout>
 
     </LinearLayout>

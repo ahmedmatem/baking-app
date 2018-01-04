@@ -32,7 +32,9 @@ public class RecipeDetailActivity extends AppCompatActivity
             mRecipe = bundle.getParcelable(RECIPE_DETAIL);
         }
 
-        setTitle(mRecipe.getName());
+        if(mRecipe !=null) {
+            setTitle(mRecipe.getName());
+        }
 
         if (findViewById(R.id.recipe_step_detail_container) != null) {
             mTwoPane = true;

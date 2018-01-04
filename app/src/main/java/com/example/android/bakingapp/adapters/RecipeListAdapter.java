@@ -80,7 +80,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
 
         // Action buttons
         Button actionExplore;
-        ImageButton actionFavorite;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -91,7 +90,6 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
 
             actionExplore = (Button) itemView.findViewById(R.id.btn_action_explore);
             actionExplore.setOnClickListener(this);
-            actionFavorite = (ImageButton) itemView.findViewById(R.id.ib_action_favorite);
         }
 
         @Override
