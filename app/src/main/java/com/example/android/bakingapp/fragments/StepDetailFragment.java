@@ -102,6 +102,10 @@ public class StepDetailFragment extends Fragment implements View.OnClickListener
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_step_detail, container, false);
 
+        if(mStep == null){
+            return view;
+        }
+
         SimpleExoPlayerView playerView = (SimpleExoPlayerView)
                 view.findViewById(R.id.player_view);
         if (!(mStep.mVideoURL == null || mStep.mVideoURL.isEmpty())) {

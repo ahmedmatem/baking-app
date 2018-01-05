@@ -41,9 +41,14 @@ public class StepDetailActivity extends AppCompatActivity
 
         if (savedInstanceState == null) {
             fragmentManager = getSupportFragmentManager();
-            stepDetailFragment =
-                    StepDetailFragment.newInstance(mStep, mStepPosition,
-                            mRecipe.getSteps().size());
+            if(mRecipe != null) {
+                stepDetailFragment =
+                        StepDetailFragment.newInstance(mStep, mStepPosition,
+                                mRecipe.getSteps().size());
+            } else {
+                stepDetailFragment =
+                StepDetailFragment.newInstance(null, mStepPosition,0);
+            }
             fragmentManager.beginTransaction()
                     .add(R.id.step_detail_container, stepDetailFragment)
                     .commit();
@@ -83,6 +88,9 @@ public class StepDetailActivity extends AppCompatActivity
     }
 
     private void setTitle() {
+        if(mRecipe == null)
+            return;
+
         if (mStepPosition == 0) {
             setTitle(mRecipe.getName() + " - " + "Introduction");
             return;

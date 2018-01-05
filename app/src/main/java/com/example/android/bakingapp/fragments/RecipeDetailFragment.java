@@ -61,7 +61,9 @@ public class RecipeDetailFragment extends Fragment
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mRecipe = getArguments().getParcelable(RECIPE_DETAIL);
-            mSteps = mRecipe.mSteps;
+            if(mRecipe != null) {
+                mSteps = mRecipe.mSteps;
+            }
         }
     }
 
@@ -74,8 +76,10 @@ public class RecipeDetailFragment extends Fragment
                 container, false);
 
         mIngredients = (TextView) view.findViewById(R.id.tv_ingredients);
-        mIngredients.setText(RecipeTextUtils.friendlyLookIngredients(
-                mRecipe.getIngredients()));
+        if(mRecipe != null) {
+            mIngredients.setText(RecipeTextUtils.friendlyLookIngredients(
+                    mRecipe.getIngredients()));
+        }
 
         mShowButton = (ImageView) view.findViewById(R.id.iv_show);
         mShowButton.setOnClickListener(this);
