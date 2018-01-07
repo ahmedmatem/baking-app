@@ -19,7 +19,6 @@ import static com.example.android.bakingapp.utilities.KeyUtils.RECIPE_LIST;
 
 public class RecipeListActivity extends AppCompatActivity implements RecipeHandler {
     public static RecipeListAdapter mAdapter;
-    private final int SPAN_COUNT = 3;
 
     private boolean mTwoPane = false;
 
@@ -36,7 +35,8 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeHandl
 
         if (mTwoPane) {
             GridLayoutManager gridLayoutManager =
-                    new GridLayoutManager(this, SPAN_COUNT);
+                    new GridLayoutManager(this,
+                            getResources().getInteger(R.integer.grid_layout_span_count));
             rv.setLayoutManager(gridLayoutManager);
         } else {
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
