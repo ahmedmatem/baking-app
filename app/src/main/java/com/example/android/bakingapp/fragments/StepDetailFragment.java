@@ -244,7 +244,7 @@ public class StepDetailFragment extends Fragment implements View.OnClickListener
     public void onPause() {
         super.onPause();
         if (mPlayer != null) {
-            mPlayer.setPlayWhenReady(false);
+            mPlayer.release();
         }
     }
 
@@ -252,7 +252,7 @@ public class StepDetailFragment extends Fragment implements View.OnClickListener
     public void onStop() {
         super.onStop();
         if (mPlayer != null) {
-            mPlayer.setPlayWhenReady(false);
+            mPlayer.release();
         }
     }
 
