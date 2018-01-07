@@ -61,6 +61,8 @@ public class RecipeStepListAdapter extends BaseAdapter {
             convertView = mLayoutInflater.inflate(R.layout.recipe_step_list_item,
                     parent, false);
             viewHolder = new ViewHolder();
+            viewHolder.stepThumbnail =
+                    (ImageView) convertView.findViewById(R.id.iv_step_thumbnail);
             viewHolder.title = convertView.findViewById(R.id.tv_step_title);
             viewHolder.shortDescription =
                     convertView.findViewById(R.id.tv_step_short_description);
@@ -73,6 +75,10 @@ public class RecipeStepListAdapter extends BaseAdapter {
         Step step = mSteps.get(position);
         if(step != null){
             viewHolder.stepId = step.mId;
+            if(!(step == null || step.mThumbnailURL.isEmpty())){
+                Picasso.with(mContext).load(Uri.parse(step.mThumbnailURL))
+                        .into(viewHolder.stepThumbnail);
+            }
             if(position == 0){
                 viewHolder.title.setText("Introduction");
             } else {
@@ -99,6 +105,7 @@ public class RecipeStepListAdapter extends BaseAdapter {
         private int stepId;
         private TextView title;
         private TextView shortDescription;
+        private ImageView stepThumbnail;
         private ImageView videoHint;
     }
 }

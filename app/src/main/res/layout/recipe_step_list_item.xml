@@ -7,18 +7,27 @@
               android:layout_height="72dp"
               android:padding="16dp">
 
+    <ImageView
+        android:id="@+id/iv_step_thumbnail"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:contentDescription="@string/step_thumbnail_description"
+        app:srcCompat="@drawable/recipe_default_image"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_toRightOf="@+id/iv_step_thumbnail"
+        android:layout_toEndOf="@+id/iv_step_thumbnail"
         android:layout_toLeftOf="@+id/iv_video_hint"
         android:paddingRight="8dp"
         android:paddingEnd="8dp"
-        android:paddingLeft="0dp"
-        android:paddingStart="0dp"
+        android:paddingLeft="8dp"
+        android:paddingStart="8dp"
         android:layout_toStartOf="@+id/iv_video_hint">
 
 
