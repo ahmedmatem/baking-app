@@ -1,9 +1,12 @@
 package com.example.android.bakingapp;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.example.android.bakingapp.fragments.RecipeDetailFragment;
 import com.example.android.bakingapp.fragments.StepDetailFragment;
@@ -51,18 +54,29 @@ public class RecipeDetailActivity extends AppCompatActivity
                 StepDetailFragment stepDetailFragment =
                         StepDetailFragment.newInstance(mRecipe.getSteps().get(0),
                                 0, mRecipe.getSteps().size());
-
-                if(findViewById(R.id.recipe_detail_container) == null){
-                    // landscape mode
-                    fragmentManager.beginTransaction()
-                            .add(R.id.recipe_step_detail_container, stepDetailFragment)
-                            .commit();
-                } else {
-                    // portrait mode
-                    fragmentManager.beginTransaction()
-                            .add(R.id.recipe_detail_container, recipeDetailFragment)
-                            .add(R.id.recipe_step_detail_container, stepDetailFragment)
-                            .commit();
+                fragmentManager.beginTransaction()
+                        .add(R.id.recipe_detail_container, recipeDetailFragment)
+                        .add(R.id.recipe_step_detail_container, stepDetailFragment)
+                        .commit();
+//                if(findViewById(R.id.recipe_detail_container) == null){
+//                    // landscape mode
+//                    fragmentManager.beginTransaction()
+//                            .add(R.id.recipe_step_detail_container, stepDetailFragment)
+//                            .commit();
+//                } else {
+//                    // portrait mode
+//                    fragmentManager.beginTransaction()
+//                            .add(R.id.recipe_detail_container, recipeDetailFragment)
+//                            .add(R.id.recipe_step_detail_container, stepDetailFragment)
+//                            .commit();
+//                }
+                if (getResources().getConfiguration().orientation ==
+                        Configuration.ORIENTATION_LANDSCAPE){
+                    View view = stepDetailFragment.getView();
+                    if(view != null) {
+                        ((LinearLayout) view.findViewById(R.id.ll_bottom_navigation))
+                                .setVisibility(View.VISIBLE);
+                    }
                 }
             } else {
                 // mobile

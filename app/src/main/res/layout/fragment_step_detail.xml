@@ -68,7 +68,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/ic_left_arrow"/>
+            android:src="@drawable/ic_left_arrow"
+            android:contentDescription="@string/preview_text"/>
 
         <TextView
             android:id="@+id/tv_step_info"
@@ -87,7 +88,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:src="@drawable/ic_right_arrow"/>
+            android:src="@drawable/ic_right_arrow"
+            android:contentDescription="@string/next_text"/>
 
     </LinearLayout>
 
