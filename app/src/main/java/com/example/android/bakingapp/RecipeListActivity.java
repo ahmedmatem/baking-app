@@ -26,7 +26,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeHandl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_list);
-        
+
         mTwoPane = getResources().getBoolean(R.bool.twoPane);
 
         RecyclerView rv = (RecyclerView) findViewById(R.id.recipe_list);

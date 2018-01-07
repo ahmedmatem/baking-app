@@ -29,6 +29,8 @@
     <!--tools text-->
     <string name="step_info_tools_text">step info</string>
     <string name="step_thumbnail_description">Step thumbnail</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 
 
 </resources>
