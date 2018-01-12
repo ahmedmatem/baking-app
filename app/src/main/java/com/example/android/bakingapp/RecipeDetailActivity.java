@@ -58,18 +58,7 @@ public class RecipeDetailActivity extends AppCompatActivity
                         .add(R.id.recipe_detail_container, recipeDetailFragment)
                         .add(R.id.recipe_step_detail_container, stepDetailFragment)
                         .commit();
-//                if(findViewById(R.id.recipe_detail_container) == null){
-//                    // landscape mode
-//                    fragmentManager.beginTransaction()
-//                            .add(R.id.recipe_step_detail_container, stepDetailFragment)
-//                            .commit();
-//                } else {
-//                    // portrait mode
-//                    fragmentManager.beginTransaction()
-//                            .add(R.id.recipe_detail_container, recipeDetailFragment)
-//                            .add(R.id.recipe_step_detail_container, stepDetailFragment)
-//                            .commit();
-//                }
+
                 if (getResources().getConfiguration().orientation ==
                         Configuration.ORIENTATION_LANDSCAPE){
                     View view = stepDetailFragment.getView();

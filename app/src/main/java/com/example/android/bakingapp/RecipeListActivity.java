@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 
 import com.example.android.bakingapp.adapters.RecipeListAdapter;
 import com.example.android.bakingapp.interfaces.RecipeHandler;
@@ -14,13 +15,18 @@ import com.example.android.bakingapp.services.RetrofitAPIClient;
 
 import java.util.ArrayList;
 
+import static com.example.android.bakingapp.BakingAppWidgetProvider.EXTRA_ITEM_POSITION;
+import static com.example.android.bakingapp.BakingAppWidgetProvider.GOTO_POSITION_ACTION;
 import static com.example.android.bakingapp.utilities.KeyUtils.RECIPE_DETAIL;
 import static com.example.android.bakingapp.utilities.KeyUtils.RECIPE_LIST;
 
 public class RecipeListActivity extends AppCompatActivity implements RecipeHandler {
+    private static final String TAG = "RecipeListActivity";
     public static RecipeListAdapter mAdapter;
 
     private boolean mTwoPane = false;
+
+    private RecyclerView rv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +35,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeHandl
 
         mTwoPane = getResources().getBoolean(R.bool.twoPane);
 
-        RecyclerView rv = (RecyclerView) findViewById(R.id.recipe_list);
+        rv = (RecyclerView) findViewById(R.id.recipe_list);
 
         if (mTwoPane) {
             GridLayoutManager gridLayoutManager =

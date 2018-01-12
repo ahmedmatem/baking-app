@@ -41,15 +41,22 @@
                 android:value=".RecipeDetailActivity"/>
         </activity>
 
-        <receiver android:name=".RecipeListWidget">
+        <!-- Widget service -->
+
+        <receiver android:name=".BakingAppWidgetProvider">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <!-- To receive broadcast with this string name -->
+                <action android:name="com.example.android.bakingapp.action.RECIPES_LOADED"/>
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/recipe_list_widget_info"/>
+                android:resource="@xml/baking_app_widget_info"/>
         </receiver>
+        <service android:name=".services.RecipesLoader"/>
+        <service android:name=".services.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
     </application>
 
 </manifest>
