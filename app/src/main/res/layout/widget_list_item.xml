@@ -7,7 +7,7 @@
               android:padding="8dp">
 
     <TextView
-        android:id="@+id/tv_widget_recipe_name"
+        android:id="@+id/tv_widget_recipe_ingredient"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="@string/recipe_name_text"/>

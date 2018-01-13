@@ -2,6 +2,7 @@ package com.example.android.bakingapp.services;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.RemoteViewsService;
 
 import com.example.android.bakingapp.data.WidgetDataProvider;
@@ -18,4 +19,6 @@ public class WidgetService extends RemoteViewsService {
                 new WidgetDataProvider(getApplicationContext(), intent);
         return dataProvider;
     }
+
+
 }

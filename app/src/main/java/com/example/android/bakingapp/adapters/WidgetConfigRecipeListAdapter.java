@@ -1,44 +1,47 @@
 package com.example.android.bakingapp.adapters;
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.RadioButton;
 
 import com.example.android.bakingapp.R;
 import com.example.android.bakingapp.interfaces.RecipeHandler;
 import com.example.android.bakingapp.models.Recipe;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 /**
- * Created by ahmed on 09/12/2017.
+ * Created by ahmed on 12/01/2018.
  */
 
-public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.ViewHolder> {
-
+public class WidgetConfigRecipeListAdapter extends
+        RecyclerView.Adapter<WidgetConfigRecipeListAdapter.ViewHolder> {
     private Context mContext;
     private ArrayList<Recipe> mRecipes;
+    private boolean[] mRadioButtonsStates;
 
     private RecipeHandler mCallback = null;
 
-    public RecipeListAdapter(Context context, RecipeHandler callback, ArrayList<Recipe> recipes)
+    public WidgetConfigRecipeListAdapter(Context context,
+                                         RecipeHandler callback,
+                                         ArrayList<Recipe> recipes)
     {
         mContext = context;
         mCallback = callback;
         mRecipes = recipes;
+        if(mRecipes != null) {
+            mRadioButtonsStates = new boolean[mRecipes.size()];
+        }
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        View view = inflater.inflate(R.layout.recipe_list_item, parent, false);
+        View view = inflater.inflate(R.layout.widget_config_recipes_item,
+                parent, false);
         return new ViewHolder(view);
     }
 
@@ -52,15 +55,10 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
         holder.itemView.setTag(recipe.getId());
         holder.position = position;
 
-        holder.name.setText(recipe.getName());
-        holder.servings.setText(String.format(mContext.getString(
-                R.string.servings), recipe.getServings()));
-
-        String imageUrl = recipe.getImage();
-        Picasso.with(mContext)
-                .load(Uri.parse(imageUrl))
-                .placeholder(R.drawable.recipe_default_image)
-                .into(holder.image);
+        holder.rbRecipeName.setText(mRecipes.get(position).getName());
+        if(mRadioButtonsStates != null) {
+            holder.rbRecipeName.setChecked(mRadioButtonsStates[position]);
+        }
     }
 
     @Override
@@ -73,36 +71,29 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
     class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         int position;
 
-        TextView name;
-        TextView servings;
-        ImageView image;
-
-        // Action buttons
-        Button actionExplore;
+        RadioButton rbRecipeName;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            name = (TextView) itemView.findViewById(R.id.tv_recipe_title);
-            servings = (TextView) itemView.findViewById(R.id.tv_recipe_servings);
-            image = (ImageView) itemView.findViewById(R.id.iv_recipe_image);
-
-            actionExplore = (Button) itemView.findViewById(R.id.btn_action_explore);
-            actionExplore.setOnClickListener(this);
+            rbRecipeName = (RadioButton) itemView.findViewById(R.id.rb_recipe_name);
+            rbRecipeName.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            switch (v.getId()){
-                case R.id.btn_action_explore:
-                    if(mCallback != null){
-                        mCallback.onItemClick(position);
-                    }
-                    break;
-                default:
-
+            if(mCallback != null){
+                mCallback.onItemClick(position);
             }
         }
+    }
+
+    public boolean[] getRadioButtonsStates() {
+        return mRadioButtonsStates;
+    }
+
+    public void setRadioButtonsStates(boolean[] radioButtonsStates) {
+        mRadioButtonsStates = radioButtonsStates;
     }
 
     public void setRecipes(ArrayList<Recipe> recipes) {
@@ -112,8 +103,4 @@ public class RecipeListAdapter extends RecyclerView.Adapter<RecipeListAdapter.Vi
     public ArrayList<Recipe> getRecipes() {
         return mRecipes;
     }
-
-
 }
-
-

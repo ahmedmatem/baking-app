@@ -54,9 +54,19 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/baking_app_widget_info"/>
         </receiver>
+
         <service android:name=".services.RecipesLoader"/>
-        <service android:name=".services.WidgetService"
+        <service
+            android:name=".services.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS"/>
+
+        <activity android:name=".WidgetConfigActivity"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

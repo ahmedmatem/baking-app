@@ -60,7 +60,7 @@ public class RecipeTextUtils {
         return quantity;
     }
 
-    private static String friendlyMeasure(String measure){
+    public static String friendlyMeasure(String measure){
         switch (measure.toUpperCase()){
             case MEASURE_CUP:
                 return "cup";

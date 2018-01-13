@@ -13,7 +13,8 @@ import com.example.android.bakingapp.models.Recipe;
 
 import java.util.ArrayList;
 
-import static com.example.android.bakingapp.BakingAppWidgetProvider.RECIPE_LIST;
+import static com.example.android.bakingapp.BakingAppWidgetProvider.RECIPE;
+import static com.example.android.bakingapp.WidgetConfigActivity.IS_CONFIG_MODE;
 
 /**
  * Created by ahmed on 10/01/2018.
@@ -22,6 +23,7 @@ import static com.example.android.bakingapp.BakingAppWidgetProvider.RECIPE_LIST;
 public class RecipesLoader extends Service implements RecipeHandler {
 
     public static ArrayList<Recipe> sRecipes;
+    private boolean mIsConfigUpdate = false;
 
     private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
@@ -30,6 +32,13 @@ public class RecipesLoader extends Service implements RecipeHandler {
         if(intent.hasExtra(AppWidgetManager.EXTRA_APPWIDGET_ID)){
             appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                     AppWidgetManager.INVALID_APPWIDGET_ID);
+            if(intent.hasExtra(IS_CONFIG_MODE)){
+                // this intent comes from widget configuration activity
+                mIsConfigUpdate = true;
+                Recipe recipe = intent.getParcelableExtra(RECIPE);
+                populateWidgetForFirstTime(recipe);
+                return super.onStartCommand(intent, flags, startId);
+            }
         }
         loadRecipes();
         return super.onStartCommand(intent, flags, startId);
@@ -63,9 +72,26 @@ public class RecipesLoader extends Service implements RecipeHandler {
             widgetUpdateIntent.setAction(BakingAppWidgetProvider.RECIPES_LOADED_ACTION);
             widgetUpdateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                     appWidgetId);
-            // out recipes in intent
+
             Bundle bundle = new Bundle();
-            bundle.putParcelableArrayList(RECIPE_LIST, sRecipes);
+            bundle.putParcelable(RECIPE, sRecipes.get(0));
+            widgetUpdateIntent.putExtras(bundle);
+
+            sendBroadcast(widgetUpdateIntent);
+
+            this.stopSelf();
+        }
+    }
+
+    private void populateWidgetForFirstTime(Recipe recipe) {
+        if(recipe != null){
+            Intent widgetUpdateIntent = new Intent();
+            widgetUpdateIntent.setAction(BakingAppWidgetProvider.RECIPES_LOADED_ACTION);
+            widgetUpdateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+                    appWidgetId);
+
+            Bundle bundle = new Bundle();
+            bundle.putParcelable(RECIPE, recipe);
             widgetUpdateIntent.putExtras(bundle);
 
             sendBroadcast(widgetUpdateIntent);
@@ -75,7 +101,7 @@ public class RecipesLoader extends Service implements RecipeHandler {
     }
 
     @Override
-    public void onExploreClicked(int position) {
+    public void onItemClick(int position) {
 
     }
 }

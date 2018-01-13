@@ -85,7 +85,7 @@ public class RecipeListActivity extends AppCompatActivity implements RecipeHandl
     }
 
     @Override
-    public void onExploreClicked(int position) {
+    public void onItemClick(int position) {
         Intent intent = new Intent(this, RecipeDetailActivity.class);
         Bundle bundle = new Bundle();
         bundle.putParcelable(RECIPE_DETAIL, mAdapter.getRecipes().get(position));

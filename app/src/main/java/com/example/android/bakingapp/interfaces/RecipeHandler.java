@@ -11,5 +11,5 @@ import java.util.List;
 
 public interface RecipeHandler {
     void onRecipeListLoaded(ArrayList<Recipe> recipes);
-    void onExploreClicked(int position);
+    void onItemClick(int position);
 }

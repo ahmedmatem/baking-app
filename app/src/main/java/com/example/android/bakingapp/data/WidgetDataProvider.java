@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.android.bakingapp.BakingAppWidgetProvider.EXTRA_ITEM_POSITION;
-import static com.example.android.bakingapp.BakingAppWidgetProvider.RECIPE_LIST;
+import static com.example.android.bakingapp.BakingAppWidgetProvider.RECIPE;
 
 /**
  * Created by ahmed on 10/01/2018.
@@ -24,11 +24,16 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     private Context mContext;
     List mCollections = new ArrayList();
-    private static ArrayList<String> sRecipeNames = new ArrayList<>();
+    private static ArrayList<String> sRecipeIngredients;
 
     public WidgetDataProvider(Context context, Intent intent) {
         mContext = context;
-        sRecipeNames = intent.getStringArrayListExtra(RECIPE_LIST);
+        Bundle bundle = intent.getExtras();
+        if (bundle != null) {
+            if(bundle.containsKey(RECIPE)) {
+                sRecipeIngredients = intent.getStringArrayListExtra(RECIPE);
+            }
+        }
     }
 
     @Override
@@ -48,23 +53,28 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
 
     @Override
     public int getCount() {
-        return sRecipeNames.size();
+        if(sRecipeIngredients != null) {
+            return sRecipeIngredients.size();
+        }
+        return 0;
     }
 
     @Override
     public RemoteViews getViewAt(int position) {
         RemoteViews rvs = new RemoteViews(mContext.getPackageName(),
                 R.layout.widget_list_item);
-        rvs.setTextViewText(R.id.tv_widget_recipe_name,
-                (CharSequence) sRecipeNames.get(position));
-        rvs.setTextColor(R.id.tv_widget_recipe_name, Color.BLACK);
+        if (sRecipeIngredients != null) {
+            rvs.setTextViewText(R.id.tv_widget_recipe_ingredient,
+                    (CharSequence) sRecipeIngredients.get(position));
+            rvs.setTextColor(R.id.tv_widget_recipe_ingredient, Color.BLACK);
+        }
 
         Bundle extras = new Bundle();
         extras.putInt(EXTRA_ITEM_POSITION, position);
         Intent fillInIntent = new Intent();
         fillInIntent.putExtras(extras);
 
-        rvs.setOnClickFillInIntent(R.id.tv_widget_recipe_name, fillInIntent);
+        rvs.setOnClickFillInIntent(R.id.tv_widget_recipe_ingredient, fillInIntent);
 
         return rvs;
     }
@@ -90,6 +100,6 @@ public class WidgetDataProvider implements RemoteViewsService.RemoteViewsFactory
     }
 
     private void initData() {
-        // TODO:
+
     }
 }

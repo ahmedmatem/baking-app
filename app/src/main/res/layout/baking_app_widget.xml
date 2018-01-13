@@ -44,7 +44,7 @@
                     android:textStyle="bold"/>
 
                 <TextView
-                    android:id="@+id/txvWidgetTitle"
+                    android:id="@+id/tv_widget_recipe_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/widget_sub_title"
@@ -59,9 +59,9 @@
             android:background="#aaa"/>
 
         <ListView
-            android:id="@+id/widgetCollectionList"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:id="@+id/widgetCollectionList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         </ListView>
     </LinearLayout>
 

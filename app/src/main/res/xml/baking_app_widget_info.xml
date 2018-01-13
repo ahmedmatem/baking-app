@@ -2,6 +2,7 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
                     android:initialKeyguardLayout="@layout/baking_app_widget"
                     android:initialLayout="@layout/baking_app_widget"
+                    android:configure="com.example.android.bakingapp.WidgetConfigActivity"
                     android:minHeight="110dp"
                     android:minWidth="110dp"
                     android:previewImage="@drawable/widget_preview_img"

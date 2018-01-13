@@ -35,11 +35,12 @@ public class RecipeDetailActivity extends AppCompatActivity
             mRecipe = bundle.getParcelable(RECIPE_DETAIL);
         }
 
-        if(mRecipe !=null) {
+        if (mRecipe != null) {
             setTitle(mRecipe.getName());
         }
 
-        if (findViewById(R.id.recipe_step_detail_container) != null) {
+//        if (findViewById(R.id.recipe_step_detail_container) != null) {
+        if (getResources().getBoolean(R.bool.twoPane)) {
             mTwoPane = true;
         }
 
@@ -60,9 +61,9 @@ public class RecipeDetailActivity extends AppCompatActivity
                         .commit();
 
                 if (getResources().getConfiguration().orientation ==
-                        Configuration.ORIENTATION_LANDSCAPE){
+                        Configuration.ORIENTATION_LANDSCAPE) {
                     View view = stepDetailFragment.getView();
-                    if(view != null) {
+                    if (view != null) {
                         ((LinearLayout) view.findViewById(R.id.ll_bottom_navigation))
                                 .setVisibility(View.VISIBLE);
                     }
@@ -100,7 +101,7 @@ public class RecipeDetailActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(int nextStep) {
-        if(mTwoPane) {
+        if (mTwoPane) {
             mStepPosition += nextStep;
             Step step = mRecipe.getSteps().get(mStepPosition);
             FragmentManager fragmentManager = getSupportFragmentManager();

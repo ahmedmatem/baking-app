@@ -35,6 +35,8 @@
     <string name="widget_sub_title">Easy to prepare recipes</string>
     <string name="recipe_name_text">Recipe name</string>
     <string name="add_widget">Add widget</string>
+    <string name="radio_button_text">Radio Button Text</string>
+    <string name="save_title">Save</string>
 
 
 </resources>

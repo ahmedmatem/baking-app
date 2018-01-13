@@ -3,6 +3,7 @@ package com.example.android.bakingapp.models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.android.bakingapp.utilities.RecipeTextUtils;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -119,6 +120,18 @@ public class Recipe implements Parcelable {
 
     public void setIngredientVisibility(boolean ingredientVisibility) {
         mIngredientVisibility = ingredientVisibility;
+    }
+
+
+
+    public ArrayList<String> ingredientsToList() {
+        ArrayList<String> result = new ArrayList<>();
+        for(Ingredient ingredient : mIngredients){
+            result.add(ingredient.mQuantity + " "
+                    + RecipeTextUtils.friendlyMeasure(ingredient.mMeasure) + " "
+                    + ingredient.mIngredient);
+        }
+        return result;
     }
 
     @Override
