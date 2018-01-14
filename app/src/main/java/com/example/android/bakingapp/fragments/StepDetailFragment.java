@@ -2,16 +2,12 @@ package com.example.android.bakingapp.fragments;
 
 import android.content.Context;
 import android.content.res.Configuration;
-import android.media.session.PlaybackState;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -47,13 +43,14 @@ import static com.example.android.bakingapp.utilities.KeyUtils.STEP_POSITION;
 public class StepDetailFragment extends Fragment implements View.OnClickListener {
     private static final String PLAYER_CURRENT_POSITION = "player-current-position";
     private static final String PLAYER_PLAYBACK_STATE = "player-playback-state";
+    private static final String PLAY_STATE = "play-state";
 
     private static final String ARG_STEP = "arg-step";
     private static final String ARG_STEPS_COUNT = "steps-count";
 
     private static SimpleExoPlayer mPlayer;
     private long mPlayerCurrentPosition = 0;
-    private int mPlaybackState;
+    private boolean mPlayState;
 
     private Step mStep;
     private int mStepPosition;
@@ -114,8 +111,7 @@ public class StepDetailFragment extends Fragment implements View.OnClickListener
                     savedInstanceState.containsKey(PLAYER_CURRENT_POSITION)) {
                 mPlayerCurrentPosition =
                         savedInstanceState.getLong(PLAYER_CURRENT_POSITION);
-                mPlaybackState =
-                        savedInstanceState.getInt(PLAYER_PLAYBACK_STATE);
+                mPlayState = mPlayer.getPlayWhenReady();
             }
             initializePlayer();
             playerView.setPlayer(mPlayer);
@@ -205,9 +201,7 @@ public class StepDetailFragment extends Fragment implements View.OnClickListener
         );
         mPlayer.seekTo(mPlayerCurrentPosition);
         mPlayer.prepare(videoSource);
-        if (mPlaybackState == PlaybackState.STATE_PLAYING) {
-            mPlayer.setPlayWhenReady(true);
-        }
+        mPlayer.setPlayWhenReady(mPlayState);
 
     }
 
@@ -216,7 +210,7 @@ public class StepDetailFragment extends Fragment implements View.OnClickListener
         super.onSaveInstanceState(outState);
         if (mPlayer != null) {
             outState.putLong(PLAYER_CURRENT_POSITION, mPlayer.getCurrentPosition());
-            outState.putInt(PLAYER_PLAYBACK_STATE, mPlayer.getPlaybackState());
+            outState.putBoolean(PLAYER_PLAYBACK_STATE, mPlayer.getPlayWhenReady());
         }
     }
 
